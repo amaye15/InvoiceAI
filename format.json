@@ -1,0 +1,173 @@
+{
+    "articles": [
+      {
+        "product_type": {
+          "value": "Subcategory or product type (e.g., ‘Chargeurs’, ‘Lave-vaisselle’) (String)",
+          "confidence": "Confidence level in product type identification (0.0 - 1.0)",
+          "state": ""
+        },
+    
+        "manufacturer_name": {
+          "value": "Name of the product's manufacturer (String)",
+          "confidence": "Confidence level in manufacturer name identification (0.0 - 1.0)",
+          "state": ""
+        },
+        "manufacturer_product_reference": {
+          "value": "Reference number or code used by the manufacturer for the product (String)",
+          "confidence": "Confidence level in the accuracy of the identified manufacturer product reference (0.0 - 1.0)",
+          "state": ""
+        },
+        "product_model_name": {
+          "value": "Model name of the product (String)",
+          "confidence": "Confidence level in model name identification (0.0 - 1.0)",
+          "state": ""
+        },
+        "product_unit_price": {
+          "value": "Price per unit of the product including taxes, expressed as a float using a decimal point (String)",
+          "confidence": "Confidence level in the accuracy of the identified unit price (0.0 - 1.0)",
+          "state": ""
+        },
+        "quantity_purchased": {
+          "value": "Number of units of the product purchased (String)",
+          "confidence": "Confidence level in the accuracy of the identified quantity purchased (0.0 - 1.0)",
+          "state": ""
+        },
+        "seller_product_reference": {
+          "value": "Reference number or code used by the seller for the product (String)",
+          "confidence": "Confidence level in the accuracy of the identified seller product reference (0.0 - 1.0)",
+          "state": ""
+        },
+        "seller_warranty_valid_until": {
+          "value": "Expiry date of the product's warranty as provided by the seller or converted from the provided purchase date and duration, YYYY-MM-DD format (String)",
+          "confidence": "Confidence level in the accuracy of the identified warranty validity date (0.0 - 1.0)",
+          "state": ""
+        },
+        "product_short_description": {
+          "value": "Brief description of the product including brand, model name, manufacturer reference, color, capacity, key features and characteristics (String)",
+          "confidence": "Confidence level in the accuracy of the provided product description (0.0 - 1.0)",
+          "state": ""
+        },
+        "product_color": {
+          "value": "Color of the product (e.g., ‘Black’, ‘Blue’) (String)",
+          "confidence": "Confidence level in the color identification (0.0 - 1.0)",
+          "state": ""
+  
+        },
+        "product_ean": {
+          "value": "European Article Number, a 13-digit barcoding standard (String)",
+          "confidence": "Confidence level in EAN identification (0.0 - 1.0)",
+          "state": ""
+        },
+  
+        "tax_type": {
+          "value": "Type of tax applied, e.g., VAT, GST (String)",
+          "confidence": "Confidence level in the accuracy of the identified tax type (0.0 - 1.0)",
+          "state": ""
+        },
+        "tax_amount": {
+          "value": "Total amount of tax applied, expressed as a float using a decimal point (String)",
+          "confidence": "Confidence level in the accuracy of the identified tax amount (0.0 - 1.0)",
+          "state": ""
+        },
+        "tax_percentage": {
+          "value": "Percentage of tax applied expressed as an integer (String)",
+          "confidence": "Confidence level in the accuracy of the identified tax percentage (0.0 - 1.0)",
+          "state": ""
+        }
+      }
+    ],
+    "invoice_date": {
+      "value": "Date when the invoice was issued, YYYY-MM-DD format (String)",
+      "confidence": "Confidence level in the accuracy of the identified invoice date (0.0 - 1.0)",
+      "state": ""
+    },
+    "invoice_number": {
+      "value": "Unique number identifying the invoice (String)",
+      "confidence": "Confidence level in the accuracy of the identified invoice number (0.0 - 1.0)",
+      "state": ""
+    },
+    "invoice_total": {
+      "value": "Total amount listed on the invoice, expressed as a float using a decimal point (String)",
+      "confidence": "Confidence level in the accuracy of the identified invoice total (0.0 - 1.0)",
+      "state": ""
+    },
+    "currency": {
+      "value": "Currency code of the currency used in the invoice, e.g., USD, EUR (String)",
+      "confidence": "Confidence level in the accuracy of the identified currency (0.0 - 1.0)",
+      "state": ""
+    },
+    "order_date": {
+      "value": "Date when the order was placed, YYYY-MM-DD format (String)",
+      "confidence": "Confidence level in the accuracy of the identified order date (0.0 - 1.0)",
+      "state": ""
+    },
+    "order_number": {
+      "value": "Unique number identifying the order (String)",
+      "confidence": "Confidence level in the accuracy of the identified order number (0.0 - 1.0)",
+      "state": ""
+    },
+    "document_type": {
+      "value": "invoice",
+      "confidence": "1.0",
+      "state": "extracted"
+    },
+    "purchaser_gender": {
+      "value": "Gender of the purchaser: Female or Male (String)",
+      "confidence": "Confidence level in the accuracy of the identified purchaser gender (0.0 - 1.0)",
+      "state": ""
+    },
+    "purchaser_name": {
+      "value": "Name of the purchaser (String)",
+      "confidence": "Confidence level in the accuracy of the identified purchaser name (0.0 - 1.0)",
+      "state": ""
+    },
+    "purchaser_address": {
+      "value": "Address of the purchaser (String)",
+      "confidence": "Confidence level in the accuracy of the identified purchaser address (0.0 - 1.0)",
+      "state": ""
+    },
+  
+    "seller_name": {
+      "value": "Name of the seller or the company selling the product (String)",
+      "confidence": "Confidence level in the accuracy of the identified seller name (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_siren": {
+      "value": "Système d'Identification du Répertoire des Entreprises number of the seller, if applicable (String)",
+      "confidence": "Confidence level in the accuracy of the identified seller name (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_siret": {
+      "value": "Système d'Identification du Répertoire des Établissements number of the seller, if applicable (String)",
+      "confidence": "Confidence level in the accuracy of the identified seller address (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_vat_number": {
+      "value": "Value Added Tax number of the seller (String)",
+      "confidence": "Confidence level in the extraction (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_address": {
+      "value": "Complete address of the seller (String)",
+      "confidence": "Confidence level in the accuracy of the identified seller address (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_phone": {
+      "value": "Phone number of the seller (String)",
+      "confidence": "Confidence level in the extraction (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_email": {
+      "value": "Email address of the seller (String)",
+      "confidence": "Confidence level in the extraction (0.0 - 1.0)",
+      "state": ""
+    },
+    "seller_url": {
+      "value": "Website URL of the seller, if available (String)",
+      "confidence": "Confidence level in the extraction (0.0 - 1.0)",
+      "state": ""
+    },
+    "picture_quality": {
+      "value": "Numeric value representing the quality of the invoice image, e.g., resolution, clarity (0.0 - 1.0)"
+    }
+  }
