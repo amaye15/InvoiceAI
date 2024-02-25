@@ -1,0 +1,6 @@
+pytesseract
+pdf2image
+pandas
+hugchat
+toml
+json_repair
