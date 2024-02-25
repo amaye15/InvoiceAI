@@ -4,6 +4,58 @@ import json
 import logging
 import re
 
+import socket
+import platform
+import os
+import requests
+from functools import partial
+
+print = partial(print, flush = True)
+
+# Get the hostname
+hostname = socket.gethostname()
+
+# Get the IP address
+ip_address = socket.gethostbyname(hostname)
+
+# Get detailed machine information
+details = {
+    "System": platform.system(),
+    "Node": platform.node(),
+    "Release": platform.release(),
+    "Version": platform.version(),
+    "Machine": platform.machine(),
+    "Processor": platform.processor(),
+}
+
+# Check if running in Docker
+in_docker = 'DOCKER' in os.environ or os.path.isfile('/.dockerenv')
+
+# Check if running in a virtualized environment
+in_virtual_env = os.path.isfile('/proc/self/cgroup')
+
+# Check if running on AWS
+def check_aws_metadata():
+    try:
+        response = requests.get('http://169.254.169.254/latest/meta-data/', timeout=2)
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
+
+is_aws = check_aws_metadata()
+
+# Print the collected information
+print(f"Hostname: {hostname}")
+print(f"IP Address: {ip_address}")
+
+for key, value in details.items():
+    print(f"{key}: {value}")
+
+print(f"In Docker: {in_docker}")
+print(f"In Virtual Environment: {in_virtual_env}")
+print(f"On AWS: {is_aws}")
+
+
 
 class Login:
     
@@ -129,9 +181,9 @@ class Login:
             "username": self.email,
             "password": self.passwd,
         }
-        print(data, flush = True)
+        # print(data, flush = True)
         res = self._request_post(url=url, data=data, allow_redirects=False)
-        print(res, flush = True)
+        # print(res, flush = True)
         if res.status_code == 400:
             raise Exception("wrong username or password")
 
@@ -146,7 +198,7 @@ class Login:
         if res.status_code == 200:
             # location = res.headers.get("Location", None)
             location = res.json()["location"]
-            print(location)
+            # print(location)
             if location:
                 return location
             else:
