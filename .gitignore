@@ -1,6 +1,7 @@
 
 *.com.*
 *secrets.toml
+*usercookies*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

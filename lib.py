@@ -6,7 +6,7 @@ import pytesseract
 
 from PIL import Image
 from hugchat import hugchat
-from hugchat.login import Login
+from login import Login
 
 import pandas as pd
 import streamlit as st
@@ -68,6 +68,8 @@ def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PA
     chatbot.switch_llm(llm_list[model])
 
     df = pd.DataFrame()
+    final_text = ""
+    best_shape = 0
 
     print(df.shape)
 
@@ -93,9 +95,14 @@ def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PA
 
         df = create_dataframe(json_text)
 
+        if abs(33 - df.shape[0]) < abs(33 - best_shape):
+            best_shape = df.shape[0]
+            final_text = llm_extracted_text
+
+
         print(df.shape)
 
-    return llm_extracted_text
+    return final_text 
 
 #@st.cache_data(show_spinner=True)
 def create_dataframe(data):
