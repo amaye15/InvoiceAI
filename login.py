@@ -90,7 +90,11 @@ class Login:
 
     def _request_get(self, url: str, params=None, allow_redirects=True) -> requests.Response:
         print(url, flush=True)
-        url = "https://huggingface.co/oauth/authorize?client_id=8f1a1d63-479b-46c8-84cb-521fe9f3222f&scope=openid%20profile&response_type=code&redirect_uri=https%3A%2F%2Fhuggingface.co%2Fchat%2Flogin%2Fcallback&state=eyJkYXRhIjp7ImV4cGlyYXRpb24iOjE3MDg4ODM0MDU4NTksInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9jaGF0L2xvZ2luL2NhbGxiYWNrIn0sInNpZ25hdHVyZSI6Ijk5NTZhNmU0MDk2ZTg5ZDg2ZGZmMTM3ZjI0NjY0ZTM3MDExNWE3OWNjZTYyMzM0MjEyZGY1NGJiNzE3MjFlNzcifQ%3D%3D"
+        #url = "https://huggingface.co/oauth/authorize?client_id=8f1a1d63-479b-46c8-84cb-521fe9f3222f&scope=openid%20profile&response_type=code&redirect_uri=https%3A%2F%2Fhuggingface.co%2Fchat%2Flogin%2Fcallback&state=eyJkYXRhIjp7ImV4cGlyYXRpb24iOjE3MDg4ODM0MDU4NTksInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9jaGF0L2xvZ2luL2NhbGxiYWNrIn0sInNpZ25hdHVyZSI6Ijk5NTZhNmU0MDk2ZTg5ZDg2ZGZmMTM3ZjI0NjY0ZTM3MDExNWE3OWNjZTYyMzM0MjEyZGY1NGJiNzE3MjFlNzcifQ%3D%3D"
+        print(params)
+        print(self.headers)
+        print(self.cookies)
+        print(allow_redirects)
         for i in range(5):
             try:
                 res = requests.get(
