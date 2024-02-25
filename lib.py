@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import json_repair
 import pytesseract
 
 from PIL import Image
@@ -60,30 +61,43 @@ Text:
 def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PASSWORD"):
     
     sign = Login(st.secrets[email], st.secrets[password])
-    cookies = sign.login(save_cookies=False)
+    
+    cookies = sign.login(save_cookies=True)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict(),) 
     llm_list = {llm.name:idx for idx, llm in enumerate(chatbot.get_available_llm_models())}
     chatbot.switch_llm(llm_list[model])
 
-    llm_extracted_text = []
-    start_idx = 0
-    end_idx = 0
-    for idx, response in enumerate(chatbot.query(prompt,use_cache=True, truncate=10000, max_new_tokens=10000, return_full_text=True, stream=True)):
-        try:
-            llm_extracted_text.append(response["token"])
-            if ("{" in list(response["token"])) & (start_idx == 0):
-                start_idx = idx
-            if "}" in list(response["token"]):
-                end_idx = idx
-        except:
-            pass
+    df = pd.DataFrame()
 
-    llm_extracted_text = "".join(llm_extracted_text[start_idx:end_idx + 1])
-    print("Not regex")
-    print(llm_extracted_text)
+    print(df.shape)
+
+    for _ in range(5):
+        if df.shape[0] == 33:
+            break
+        llm_extracted_text = []
+        start_idx = 0
+        end_idx = 0
+        for idx, response in enumerate(chatbot.query(prompt,use_cache=True, truncate=10000, max_new_tokens=10000, return_full_text=True, stream=True)):
+            try:
+                llm_extracted_text.append(response["token"])
+                if ("{" in list(response["token"])) & (start_idx == 0):
+                    start_idx = idx
+                if "}" in list(response["token"]):
+                    end_idx = idx
+            except:
+                pass
+
+        llm_extracted_text = "".join(llm_extracted_text[start_idx:end_idx + 1])
+
+        json_text = json_repair.repair_json(llm_extracted_text, return_objects=True)
+
+        df = create_dataframe(json_text)
+
+        print(df.shape)
+
     return llm_extracted_text
 
-@st.cache_data(show_spinner=True)
+#@st.cache_data(show_spinner=True)
 def create_dataframe(data):
     flat_data = []
     for key, value in data.items():
@@ -108,7 +122,7 @@ def create_dataframe(data):
                 })
     return pd.DataFrame(flat_data)
 
-@st.cache_data(show_spinner=True)
+#@st.cache_data(show_spinner=True)
 def update_json(data, df, edited_df):
     for key, val in data.items():
         if key == "articles":

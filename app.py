@@ -71,7 +71,9 @@ with col2:
     # Load and display the editable DataFrame
     data = load_data(JSON_FORMATTER)
 
+    
     df = create_dataframe(json_text)
+
     for col in df.columns:
         df[col] = df[col].astype(str)
 
