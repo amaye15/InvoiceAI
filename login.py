@@ -129,9 +129,9 @@ class Login:
             "username": self.email,
             "password": self.passwd,
         }
-        print(data)
+        print(data, flush = True)
         res = self._request_post(url=url, data=data, allow_redirects=False)
-        print(res)
+        print(res, flush = True)
         if res.status_code == 400:
             raise Exception("wrong username or password")
 
