@@ -87,17 +87,24 @@ class Login:
                 return self.cookies
             except:
                 raise Exception("load cookies from files fatal. Please check the format")
-    
+    #https://huggingface.co/oauth/authorize?client_id=8f1a1d63-479b-46c8-84cb-521fe9f3222f&scope=openid%20profile&response_type=code&redirect_uri=https%3A%2F%2Fhuggingface.co%2Fchat%2Flogin%2Fcallback&state=eyJkYXRhIjp7ImV4cGlyYXRpb24iOjE3MDg4ODI2MTI4MzAsInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9jaGF0L2xvZ2luL2NhbGxiYWNrIn0sInNpZ25hdHVyZSI6IjY5M2RiMzUxMmFlNzdkOTg0MTE0MTE3MGFlYTE1ZDk3M2U2YzMwOWE1N2RhOWU5ZDQyMmU5N2FkN2U0OTdjYWQifQ%3D%3D/login?next=%2Foauth%2Fauthorize%3Fclient_id%3D8f1a1d63-479b-46c8-84cb-521fe9f3222f%26scope%3Dopenid%2520profile%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fhuggingface.co%252Fchat%252Flogin%252Fcallback%26state%3DeyJkYXRhIjp7ImV4cGlyYXRpb24iOjE3MDg4ODI2MTI4MzAsInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9jaGF0L2xvZ2luL2NhbGxiYWNrIn0sInNpZ25hdHVyZSI6IjY5M2RiMzUxMmFlNzdkOTg0MTE0MTE3MGFlYTE1ZDk3M2U2YzMwOWE1N2RhOWU5ZDQyMmU5N2FkN2U0OTdjYWQifQ%253D%253D
+    #https://huggingface.co/oauth/authorize?client_id=8f1a1d63-479b-46c8-84cb-521fe9f3222f&scope=openid%20profile&response_type=code&redirect_uri=https%3A%2F%2Fhuggingface.co%2Fchat%2Flogin%2Fcallback&state=eyJkYXRhIjp7ImV4cGlyYXRpb24iOjE3MDg4ODIzNjYwMTEsInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9jaGF0L2xvZ2luL2NhbGxiYWNrIn0sInNpZ25hdHVyZSI6IjRkZGVmM2E1NDlhZTAxNjdhMWZiODA4N2I2NWQzYzJjOGJlOTZkNTY3ZTkxMWQ2MjdiYTEwMTM2Mjg0NzM0MjkifQ%3D%3D
+
     def _request_get(self, url: str, params=None, allow_redirects=True) -> requests.Response:
         print(url, flush=True)
-        res = requests.get(
-            url,
-            params=params,
-            headers=self.headers,
-            cookies=self.cookies,
-            allow_redirects=allow_redirects,
-        )
-        self._refresh_cookies(res.cookies)
+        for i in range(5):
+            try:
+                res = requests.get(
+                    url,
+                    params=params,
+                    headers=self.headers,
+                    cookies=self.cookies,
+                    allow_redirects=allow_redirects,
+                )
+                self._refresh_cookies(res.cookies)
+                break 
+            except:
+                print("Trying to Login")
         return res
 
     def _request_post(self, url: str, headers=None, params=None, data=None, stream=False,

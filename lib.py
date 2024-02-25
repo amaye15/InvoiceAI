@@ -71,6 +71,9 @@ def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PA
     final_text = ""
     best_shape = 0
 
+    # Initialize is_retry flag
+    is_retry = False
+
     print(df.shape)
 
     for _ in range(5):
@@ -79,7 +82,7 @@ def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PA
         llm_extracted_text = []
         start_idx = 0
         end_idx = 0
-        for idx, response in enumerate(chatbot.query(prompt,use_cache=True, truncate=10000, max_new_tokens=10000, return_full_text=True, stream=True)):
+        for idx, response in enumerate(chatbot.query(prompt,use_cache=True, truncate=10000, max_new_tokens=10000, return_full_text=True, stream=True, is_retry=is_retry)):
             try:
                 llm_extracted_text.append(response["token"])
                 if ("{" in list(response["token"])) & (start_idx == 0):
@@ -99,7 +102,7 @@ def query_llm(prompt: str, model: str, email: str = "EMAIL", password: str = "PA
             best_shape = df.shape[0]
             final_text = llm_extracted_text
 
-
+        is_retry = df.shape[0] != 33
         print(df.shape)
 
     return final_text 
